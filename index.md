@@ -1,3 +1,5 @@
+Project can be found at [deeptivaidy.github.io/face-mask-detection](https://deeptivaidy.github.io/face-mask-detection)
+
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/deeptivaidy/face-mask-detection/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
