@@ -1,5 +1,4 @@
 ## CS 4641: Face Mask Detection
-Project can be found at [deeptivaidy.github.io/face-mask-detection](https://deeptivaidy.github.io/face-mask-detection)
 
 Contributors (alphabetically): Tushna Eduljee, Kenneth Kanampully, Nesha Prabahar, Deepti Vaidyanathan
 
@@ -16,7 +15,11 @@ We aim to use unsupervised learning for data processing and supervised learning 
 In addition, we will use supervised learning in order to idenify the people in the frame who are not wearing a mask using existing object detection architectures. To train our model, we found a [kaggle dataset](https://www.kaggle.com/sigmind/masked-face-detection-wider-dataset?select=COVID-mask-detection_WIDER.tar.xz) that has labelled bounding boxes around mask wearers and non-mask wearers. After studying various object detection models (YOLO, SSD, Faster-RCNN, and R-FCN), we have decided to use the Faster-RCNN model because it has very high accuracy without sacrificing speed. Compared to the other models, which make various trade-offs in accuracy and confidence to work well with multiple frames of data, Faster-RCNN is the most accurate for our purposes since we are only focusing on single-frame image data and do not need to be concerned about multi-frame detection at this time.
 
 ### Results
-
+We will be evaluating our model based on the Intersection-Over-Union metric as defined by 
+$$ 
+IoU = \frac{area(gt \cap pd)}{area(gt \cup pd)}
+$$
+where $gt$ is the "ground truth mask" and $pd$ is the "predicted mask." Our IoU threshold $\alpha$ will be 0.5. In addition, we would also like to use the average precision metric along with a PR-curve in order to evaluate the precision and recall of our detector.
 
 ### Discussion
 If we are able to achieve our goals, we would have built a way to accurately detect multiple people who are not wearing a mask in a picture. This could then be implemented in security cameras in enclosed spaces, allowing business owners to do real time monitoring of the people in their stores.
@@ -25,34 +28,6 @@ Another potential use of this technology would be to use it to detect the most c
 
 ### References
 
+
 ![Project Overview Infographic](infographic.png)
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/deeptivaidy/face-mask-detection/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
