@@ -1,2 +1,2 @@
-# face-mask-detection
-For the CS 4641 Machine Learning course
+# CS 4641: Face Mask Detection
+
