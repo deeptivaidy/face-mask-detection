@@ -54,15 +54,15 @@ The final stage in our data cleaning procedure was removing extreme outliers fro
 
 Box Plot including Outliers:
 
-![image](with_outliers.png)
+![Outliers](with_outliers.PNG)
 
 Box Plot not including Outliers:
 
-![image](without_outliers.png)
+![Without Outliers](without_outliers.PNG)
 
 Sample Table of Outliers:
 
-![image](table.png)
+![Table](table.PNG)
 
 
 ## Data Preprocessing
@@ -73,15 +73,15 @@ Additionally, in order to prep the data for the pipeline, we have decided to use
 
 Image Before PCA and with Bounding Box:
 
-![Bounding Box](incorrect.png)
+![Bounding Box](bounding_box.PNG)
 
 Image after PCA:
 
-![image](pca.png)
+![PCA](pca.png)
 
 Variance:
 
-![image](variance.png)
+![Variance](variance.png)
 
 
 ## Future Work
