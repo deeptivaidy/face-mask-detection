@@ -30,7 +30,8 @@ The dataset that we found would be most suitable for our needs can be found on k
 [Here is the link to the kaggle dataset](https://www.kaggle.com/andrewmvd/face-mask-detection)
 
 Example Images:
-> example image here
+![Example Image 1](dataset1.png)
+![Example Image 2](dataset2.png)
 
 ## Data Cleaning Procedures
 
@@ -42,7 +43,8 @@ The first step in our data cleaning efforts includes converting the xml files (o
 
 For our model, we really only require class one (wearing a mask) or class two (not wearing a mask). For this reason, we are removing the bounding box labels which belong to class three (wearing a mask, but improperly). This is because those images vary widely from wearing a mask slightly improperly to barely wearing a mask. As there was too much ambiguity, we decided to remove that category altogether and focus our model on wearing or not wearing a mask. This results in a case of skewed classes, but we prefer the case of people being labelled with a mask to without, in case our model is deployed in the real world. This is because resources of locating the person in a business establishment should be saved for those truly not wearing a mask and not those half-wearing a mask. 81% of our labelled bounding boxes are with masks, and all other labels are without masks - showing the skewed classes.
 
-> Example of classification
+Example Image of incorrectly wearing a mask:
+![Example Image 3](incorrect.png)
 
 #### Removing Outliers
 
@@ -59,6 +61,14 @@ Additionally, in order to prep the data for the pipeline, we have decided to use
 > Images of before and after PCA
 
 ## Future Work
+
+Training Model: In order to train our model, we have found a kaggle dataset that has labelled bounding boxes around mask wearers and non-mask wearers. The kaggle dataset can be found at this link: https://www.kaggle.com/notadithyabhat/face-mask-detector
+
+Evaluation Method: We are planning to evaluate our methods using Intersection over Union (IoU) and mean average precision (mAP). IoU determines overlap of bounding boxes with the group truth to create a threshold for mAP and accordingly adjust the weights. mAP is the area under the precision-recall curve. A prediction is correct if it meets the threshold IoU. 
+
+As we have just completed our unsupervised learning step, and PCA did not require us to convert categorical data into discrete, we have yet to make the design choice of whether we want to encode the categorical data as one hot or integer encoding.
+
+Additionally, once we complete our model, we plan on looking into further performance improvements such as scaling the image in order to reduce the need for padding.
 
 
 ## References
