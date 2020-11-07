@@ -40,6 +40,10 @@ Example Images:
 
 The first step in our data cleaning efforts includes converting the xml files (one per image) into tabular data frame format so that it could be used for preprocessing purposes. This consisted of having an individual column for each possible bounding box in an image. Although this leads to a somewhat sparse array, we manage this by reducing outliers as well as using the numpy special representation for sparse arrays.
 
+Tabular Data:
+
+![Table](table.PNG)
+
 #### Removing a Classification from the Dataset
 
 For our model, we really only require class one (wearing a mask) or class two (not wearing a mask). For this reason, we are removing the bounding box labels which belong to class three (wearing a mask, but improperly). This is because those images vary widely from wearing a mask slightly improperly to barely wearing a mask. As there was too much ambiguity, we decided to remove that category altogether and focus our model on wearing or not wearing a mask. This results in a case of skewed classes, but we prefer the case of people being labelled with a mask to without, in case our model is deployed in the real world. This is because resources of locating the person in a business establishment should be saved for those truly not wearing a mask and not those half-wearing a mask. 81% of our labelled bounding boxes are with masks, and all other labels are without masks - showing the skewed classes.
@@ -60,10 +64,6 @@ Box Plot not including Outliers:
 
 ![Without Outliers](without_outliers.PNG)
 
-Sample Table of Outliers:
-
-![Table](table.PNG)
-
 
 ## Data Preprocessing
 
@@ -82,6 +82,8 @@ Image after PCA:
 Variance:
 
 ![Variance](variance.png)
+
+According to this figure, we can see that the PCA worked well to maintain the variance under lower principle component numbers. Although our plot has a few skips, we used 18 principle components to reduce the dimensionality for the rest of our images. 
 
 
 ## Future Work
