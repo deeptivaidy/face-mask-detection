@@ -30,6 +30,7 @@ The dataset that we found would be most suitable for our needs can be found on k
 [Here is the link to the kaggle dataset](https://www.kaggle.com/andrewmvd/face-mask-detection)
 
 Example Images:
+
 ![Example Image 1](dataset1.png)
 ![Example Image 2](dataset2.png)
 
@@ -44,6 +45,7 @@ The first step in our data cleaning efforts includes converting the xml files (o
 For our model, we really only require class one (wearing a mask) or class two (not wearing a mask). For this reason, we are removing the bounding box labels which belong to class three (wearing a mask, but improperly). This is because those images vary widely from wearing a mask slightly improperly to barely wearing a mask. As there was too much ambiguity, we decided to remove that category altogether and focus our model on wearing or not wearing a mask. This results in a case of skewed classes, but we prefer the case of people being labelled with a mask to without, in case our model is deployed in the real world. This is because resources of locating the person in a business establishment should be saved for those truly not wearing a mask and not those half-wearing a mask. 81% of our labelled bounding boxes are with masks, and all other labels are without masks - showing the skewed classes.
 
 Example Image of incorrectly wearing a mask:
+
 ![Example Image 3](incorrect.png)
 
 #### Removing Outliers
