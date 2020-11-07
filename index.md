@@ -52,7 +52,18 @@ Example Image of incorrectly wearing a mask:
 
 The final stage in our data cleaning procedure was removing extreme outliers from the dataset so that we can reduce our feature space from 120 columns to 40 columns. An outlier for our purposes is an image with an abnormally large amount of bounding boxes associated with it. This would be an outlier because from a data processing standpoint, there would be no need to increase the dimensionality of the data being processed by ten fold just for the sake of a few images from the entire bunch having many faces detected. The identification of such outliers was done based on the number of bounding boxes per image and the box plot of that data. We do not get rid of all outliers, however, as there is a significant enough portion to include in our dataset so that we can show an accurate representation of different sized crowds. Additionally, this removal of outliers further decreases the dataset which is already on the smaller side. This cleaning reduces it by 7 images.
 
-> Graphs on outliers
+Box Plot including Outliers:
+
+![image](with_outliers.png)
+
+Box Plot not including Outliers:
+
+![image](without_outliers.png)
+
+Sample Table of Outliers:
+
+![image](table.png)
+
 
 ## Data Preprocessing
 
@@ -60,7 +71,18 @@ For the data preprocessing stage we first decided to standardize image sizes by 
 
 Additionally, in order to prep the data for the pipeline, we have decided to use principal component analysis (PCA) before the images reach the supervised learning model itself. PCA is a form of unsupervised learning which uses variance and covariance of a dataset in order to take linear combinations of the data and reduce the overall dimensionality without resulting in much data loss (depending on hyperparameter tuning of k based on percentage of variance retained). It is used to speed up the running time of an algorithm. We decided to use PCA for our data pipeline in order to reduce image representation in memory and therefore require less computation per image passing through our model.
 
-> Images of before and after PCA
+Image Before PCA and with Bounding Box:
+
+![Bounding Box](incorrect.png)
+
+Image after PCA:
+
+![image](pca.png)
+
+Variance:
+
+![image](variance.png)
+
 
 ## Future Work
 
