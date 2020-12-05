@@ -1,0 +1,60 @@
+[I 11:05:15.424 NotebookApp] The port 8888 is already in use, trying another port.
+[I 11:05:15.481 NotebookApp] JupyterLab extension loaded from C:\Users\kenka\Anaconda3\lib\site-packages\jupyterlab
+[I 11:05:15.481 NotebookApp] JupyterLab application directory is C:\Users\kenka\Anaconda3\share\jupyter\lab
+[I 11:05:15.484 NotebookApp] Serving notebooks from local directory: C:\Users\kenka\Documents\Classes\CS 4641\face-mask-detection
+[I 11:05:15.484 NotebookApp] The Jupyter Notebook is running at:
+[I 11:05:15.484 NotebookApp] http://localhost:8889/?token=85c82dada92589d0beed7d27000d2e90634b8157ed90ea56
+[I 11:05:15.484 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 11:05:15.550 NotebookApp] 
+    
+    Copy/paste this URL into your browser when you connect for the first time,
+    to login with a token:
+        http://localhost:8889/?token=85c82dada92589d0beed7d27000d2e90634b8157ed90ea56
+[I 11:05:15.792 NotebookApp] Accepting one-time-token-authenticated connection from ::1
+[W 11:05:17.439 NotebookApp] Notebook face_mask_detector.ipynb is not trusted
+[I 11:05:19.399 NotebookApp] Kernel started: 50dc4d2c-996b-4dad-be62-9ccdb7aa149d
+[I 11:05:20.473 NotebookApp] Adapting to protocol v5.1 for kernel 50dc4d2c-996b-4dad-be62-9ccdb7aa149d
+[I 11:07:20.193 NotebookApp] Saving file at /face_mask_detector.ipynb
+[W 11:07:20.217 NotebookApp] Notebook face_mask_detector.ipynb is not trusted
+[I 11:09:20.186 NotebookApp] Saving file at /face_mask_detector.ipynb
+[W 11:09:20.193 NotebookApp] Notebook face_mask_detector.ipynb is not trusted
+[I 11:23:20.178 NotebookApp] Saving file at /face_mask_detector.ipynb
+[W 11:23:20.183 NotebookApp] Notebook face_mask_detector.ipynb is not trusted
+[I 11:25:20.052 NotebookApp] Saving file at /face_mask_detector.ipynb
+[W 11:25:20.059 NotebookApp] Notebook face_mask_detector.ipynb is not trusted
+[I 11:27:20.066 NotebookApp] Saving file at /face_mask_detector.ipynb
+[W 11:27:20.071 NotebookApp] Notebook face_mask_detector.ipynb is not trusted
+[I 11:29:19.399 NotebookApp] Saving file at /face_mask_detector.ipynb
+[W 11:29:19.400 NotebookApp] Notebook face_mask_detector.ipynb is not trusted
+[I 11:31:19.973 NotebookApp] Saving file at /face_mask_detector.ipynb
+[W 11:31:19.973 NotebookApp] Notebook face_mask_detector.ipynb is not trusted
+[I 11:33:19.436 NotebookApp] Saving file at /face_mask_detector.ipynb
+[W 11:33:19.437 NotebookApp] Notebook face_mask_detector.ipynb is not trusted
+[I 11:35:19.397 NotebookApp] Saving file at /face_mask_detector.ipynb
+[W 11:35:19.398 NotebookApp] Notebook face_mask_detector.ipynb is not trusted
+[I 11:37:19.408 NotebookApp] Saving file at /face_mask_detector.ipynb
+[W 11:37:19.409 NotebookApp] Notebook face_mask_detector.ipynb is not trusted
+[I 11:41:19.967 NotebookApp] Saving file at /face_mask_detector.ipynb
+[W 11:41:19.968 NotebookApp] Notebook face_mask_detector.ipynb is not trusted
+[I 11:43:19.412 NotebookApp] Saving file at /face_mask_detector.ipynb
+[W 11:43:19.413 NotebookApp] Notebook face_mask_detector.ipynb is not trusted
+[I 11:45:19.419 NotebookApp] Saving file at /face_mask_detector.ipynb
+[W 11:45:19.421 NotebookApp] Notebook face_mask_detector.ipynb is not trusted
+[I 11:47:19.410 NotebookApp] Saving file at /face_mask_detector.ipynb
+[W 11:47:19.412 NotebookApp] Notebook face_mask_detector.ipynb is not trusted
+[I 11:49:19.412 NotebookApp] Saving file at /face_mask_detector.ipynb
+[W 11:49:19.413 NotebookApp] Notebook face_mask_detector.ipynb is not trusted
+[I 11:51:19.406 NotebookApp] Saving file at /face_mask_detector.ipynb
+[W 11:51:19.407 NotebookApp] Notebook face_mask_detector.ipynb is not trusted
+[I 11:53:19.413 NotebookApp] Saving file at /face_mask_detector.ipynb
+[W 11:53:19.413 NotebookApp] Notebook face_mask_detector.ipynb is not trusted
+[I 11:55:19.411 NotebookApp] Saving file at /face_mask_detector.ipynb
+[W 11:55:19.412 NotebookApp] Notebook face_mask_detector.ipynb is not trusted
+[I 11:57:19.416 NotebookApp] Saving file at /face_mask_detector.ipynb
+[W 11:57:19.417 NotebookApp] Notebook face_mask_detector.ipynb is not trusted
+[I 11:59:19.392 NotebookApp] Saving file at /face_mask_detector.ipynb
+[W 11:59:19.393 NotebookApp] Notebook face_mask_detector.ipynb is not trusted
+[I 12:01:19.375 NotebookApp] Saving file at /face_mask_detector.ipynb
+[W 12:01:19.375 NotebookApp] Notebook face_mask_detector.ipynb is not trusted
+[I 12:03:19.942 NotebookApp] Saving file at /face_mask_detector.ipynb
+[W 12:03:19.942 NotebookApp] Notebook face_mask_detector.ipynb is not trusted
