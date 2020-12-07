@@ -17,11 +17,6 @@ For the model selection task, we conducted thorough research on YOLO, Faster RCN
 
 ![Project Overview Infographic](infographic.png)
 
-## Touchpoint 2 Goals
-
-Our goals for Touchpoint 2 are:
-1. Clean the data
-1. Process the data using principal component analysis (PCA)
 
 ## Dataset
 
@@ -69,7 +64,7 @@ Box Plot not including Outliers:
 
 For the data preprocessing stage we first decided to standardize image sizes by adding padding to the bottom and left edges of each image so that it increased the overall image size to 600x600. This effectively became the maximum x and y for all images in dataset. Although increasing the representation of each image effectively means storing more data, and therefore performing more computation, it also means that we do not have to crop images and therefore edit any bounding box information. Once we complete our model, we plan on looking into further performance improvements such as scaling the image in order to reduce the need for padding.
 
-Additionally, in order to prep the data for the pipeline, we have decided to use principal component analysis (PCA) before the images reach the supervised learning model itself. PCA is a form of unsupervised learning which uses variance and covariance of a dataset in order to take linear combinations of the data and reduce the overall dimensionality without resulting in much data loss (depending on hyperparameter tuning of k based on percentage of variance retained). It is used to speed up the running time of an algorithm. We decided to use PCA for our data pipeline in order to reduce image representation in memory and therefore require less computation per image passing through our model.
+By standardizing image size, we have also increased the amount of information that will be passed into our data pipeline, and therefore it is necessary that we take measures to reduce the dimensionality of our images. To this end, we have decided to use principal component analysis (PCA) for image compression. PCA is a form of unsupervised learning which uses variance and covariance of a dataset in order to take linear combinations of the data and reduce the overall dimensionality without resulting in much data loss (depending on hyperparameter tuning of k based on percentage of variance retained). We can use it on our images to blend less significant edges that may be revealed by the convolutional layers with other edges in order to reduce the the runtime and energy towards filtering the insignificant aspects of the image. In order to determine the optimal number of components to keep, we plotted a graph of the percentage of variance to retain (as seen below).
 
 Image Before PCA and with Bounding Box:
 
@@ -83,18 +78,12 @@ Variance:
 
 ![Variance](variance.png)
 
-According to this figure, we can see that the PCA worked well to maintain the variance under lower principle component numbers. Although our plot has a few skips, we used 18 principle components to reduce the dimensionality for the rest of our images. 
+Based on the figure above, we settled the number of principle components to 18 since it is the lowest number of components where we reliably retained enough of the variance.
 
 
 ## Future Work
 
-Training Model: In order to train our model, we have found a kaggle dataset that has labelled bounding boxes around mask wearers and non-mask wearers. The kaggle dataset can be found at this link: https://www.kaggle.com/notadithyabhat/face-mask-detector
-
-Evaluation Method: We are planning to evaluate our methods using Intersection over Union (IoU) and mean average precision (mAP). IoU determines overlap of bounding boxes with the group truth to create a threshold for mAP and accordingly adjust the weights. mAP is the area under the precision-recall curve. A prediction is correct if it meets the threshold IoU. 
-
-As we have just completed our unsupervised learning step, and PCA did not require us to convert categorical data into discrete, we have yet to make the design choice of whether we want to encode the categorical data as one hot or integer encoding.
-
-Additionally, once we complete our model, we plan on looking into further performance improvements such as scaling the image in order to reduce the need for padding.
+The original labeled images of the dataset included bunding boxes for those who were wearing masks incorrectly, which could be useful to detect for our purpose of determining which people in a crowd are not following COVID-related health guidelines. We would also look into larger datasets that contain a wider variety of people and masks in order to make our model more robust to various situations. Faster-RCNN is only one object detection architecture of many, and it would be useful to compare the performance of our model to others like YOLOv5 and SSD trained on the same dataset. After performance comparisons on single-frame image data, we could see how well it works for detecting over multiple frames as well as evaluating the best frame rate to apply the detector in order gather data on mask wearing in real time.
 
 
 ## References
