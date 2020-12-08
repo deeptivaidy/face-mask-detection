@@ -24,7 +24,7 @@ The dataset that we found would be most suitable for our needs can be found on k
 
 [Here is the link to the kaggle dataset](https://www.kaggle.com/andrewmvd/face-mask-detection)
 
-Example Images:
+*Example Images:*
 
 ![Example Image 1](dataset1.png)
 ![Example Image 2](dataset2.png)
@@ -35,7 +35,7 @@ Example Images:
 
 The first step in our data cleaning efforts includes converting the xml files (one per image) into tabular data frame format so that it could be used for preprocessing purposes. This consisted of having an individual column for each possible bounding box in an image. Although this leads to a somewhat sparse array, we manage this by reducing outliers as well as using the numpy special representation for sparse arrays.
 
-Tabular Data:
+*Tabular Data:*
 
 ![Table](table.PNG)
 
@@ -43,7 +43,7 @@ Tabular Data:
 
 For our model, we really only require class one (wearing a mask) or class two (not wearing a mask). For this reason, we are removing the bounding box labels which belong to class three (wearing a mask, but improperly). This is because those images vary widely from wearing a mask slightly improperly to barely wearing a mask. As there was too much ambiguity, we decided to remove that category altogether and focus our model on wearing or not wearing a mask. This results in a case of skewed classes, but we prefer the case of people being labelled with a mask to without, in case our model is deployed in the real world. This is because resources of locating the person in a business establishment should be saved for those truly not wearing a mask and not those half-wearing a mask. 81% of our labelled bounding boxes are with masks, and all other labels are without masks - showing the skewed classes.
 
-Example Image of incorrectly wearing a mask:
+*Example Image of incorrectly wearing a mask:*
 
 ![Example Image 3](incorrect.png)
 
@@ -51,40 +51,96 @@ Example Image of incorrectly wearing a mask:
 
 The final stage in our data cleaning procedure was removing extreme outliers from the dataset so that we can reduce our feature space from 120 columns to 40 columns. An outlier for our purposes is an image with an abnormally large amount of bounding boxes associated with it. This would be an outlier because from a data processing standpoint, there would be no need to increase the dimensionality of the data being processed by ten fold just for the sake of a few images from the entire bunch having many faces detected. The identification of such outliers was done based on the number of bounding boxes per image and the box plot of that data. We do not get rid of all outliers, however, as there is a significant enough portion to include in our dataset so that we can show an accurate representation of different sized crowds. Additionally, this removal of outliers further decreases the dataset which is already on the smaller side. This cleaning reduces it by 7 images.
 
-Box Plot including Outliers:
+*Box Plot including Outliers:*
 
 ![Outliers](with_outliers.PNG)
 
-Box Plot not including Outliers:
+*Box Plot not including Outliers:*
 
 ![Without Outliers](without_outliers.PNG)
 
 
+#### Creating a new Dataframe
+
+While training and testing the model, we found out early on that the precision recall of "without_masks" was very low. In order to increase the precision recall, we brainstormed ways to increase the dataset. We found that including the outliers could help with our problem, but we did not want to have a high dimensionality. Therefore, we decided to restructure our dataframe so that instead of each row being an image, each row is a bounding box. This allowed us to keep the outliers, increasing the size of our dataset, and greatly helped in implementing the Faster R-CNN model later on.
+
+*The New Dataframe Layout:*
+
+![Bounding Box Dataframe](bb_dict.PNG)
+
+
+#### Data Augmentation
+
+Because we originally reduced the dataset size by removing a classification and extreme outliers, we wanted to increase the dataset. We attempted to use rotation and reflection in order to augment the images early on. However, we were having trouble matching up the bounding boxes to the newly augmented data. Durin gour midterm report, were were advised that while data augmentation is useful, it is not vital to training the model. This advice coupled with the new bounding-box based data frame that allowed for extreme outliers led us to scrapping the data augmention.
+
+*Example of a rotational augmentation:*
+
+![Rotation augment](data_augmentation.PNG)
+
+
 ## Data Preprocessing
+
+
+#### Padding
 
 For the data preprocessing stage we first decided to standardize image sizes by adding padding to the bottom and left edges of each image so that it increased the overall image size to 600x600. This effectively became the maximum x and y for all images in dataset. Although increasing the representation of each image effectively means storing more data, and therefore performing more computation, it also means that we do not have to crop images and therefore edit any bounding box information. Once we complete our model, we plan on looking into further performance improvements such as scaling the image in order to reduce the need for padding.
 
+
+#### Principal Component Analysis (PCA)
+
 By standardizing image size, we have also increased the amount of information that will be passed into our data pipeline, and therefore it is necessary that we take measures to reduce the dimensionality of our images. To this end, we have decided to use principal component analysis (PCA) for image compression. PCA is a form of unsupervised learning which uses variance and covariance of a dataset in order to take linear combinations of the data and reduce the overall dimensionality without resulting in much data loss (depending on hyperparameter tuning of k based on percentage of variance retained). We can use it on our images to blend less significant edges that may be revealed by the convolutional layers with other edges in order to reduce the the runtime and energy towards filtering the insignificant aspects of the image. In order to determine the optimal number of components to keep, we plotted a graph of the percentage of variance to retain (as seen below).
 
-Image Before PCA and with Bounding Box:
+*Image Before PCA and with Bounding Box:*
 
 ![Bounding Box](bounding_box.PNG)
 
-Image after PCA:
+*Image after PCA:*
 
 ![PCA](pca.png)
 
-Variance:
+*Variance:*
 
 ![Variance](variance.png)
 
 Based on the figure above, we settled the number of principle components to 18 since it is the lowest number of components where we reliably retained enough of the variance.
 
+## Faster R-CNN
 
-## Future Work
+Faster-RCNN is an object detection architecture based on the paper written by Ren et al. in January 2016. It builds on Fast-RCNN by using a region proposal network to produce regions of an image where an object of interest may potentially exist, and passes those regions to Fast-RCNN in order to detect the objects in them. It is faster and more efficient than it’s previous iterations because the RPN tells the detector where to look. 
+
+#### Region Proposal Network
+
+The RPN is a convolutional neural network that helps us identify and size regions of interest within the image. The premise is to use uniform anchor points to calculate regions that most closely intersect with our ground-truth bounding boxes in order to produce regions of interest. We used the pretrained VGG-16 classifier to extract feature maps of the image and pass it to 2 1x1 convolutional classifier layer and regression layer, where we consider anchors with an Intersection-over-Union value with the ground-truth bounding boxes greater than or equal to 0.5 to be a part of the “foreground” with the rest being “background” regions. We chose this value specifically because we wanted to be consistent with the hyperparameters used within the original Faster-RCNN paper. We finally apply non-maximum suppression in order to make sure that we do not have any overlapping regions of interest. 
+
+#### Region of Interest Pooling and Classification
+
+The output of the RPN layer feeds into ROI pooling, which is then classified as with or without masks to the pooled ROIs. In addition, they go through a regression layer in order to size the bounding boxes of the now classified regions of the image.
+
+#### Training and Testing
+
+We had a skewed dataset with 3232 bounding boxes labeled as ‘without_mask’ and only 717 labeled as ‘with_mask.’ However, by representing our data as a row per bounding box, it allowed us to be able to maintain the distribution of the labels across the training and test datasets. We split our data with 70% in training and 30% in test.
+
+## Results
+
+After training over 25 epochs, we calculated the average Intersection-over-Union with the ground-truth bounding boxes based on our detector’s predictions. IoU is calculated by the following equation:
+IoU = Area of Overlap/Area of Union
+
+The IoU for both labels are represented below:
+**With_mask**: 0.7314
+**Without_mask**: 0.6089
+We plotted the precision-recall curves for each label and in both the training and test datasets since it is resistant to skewed datasets:
+
+*Include plot*
+
+## Discussion
+
+IoU between predicted region of interest and ground-truth bounding box represents how well our predicted bounding boxes match up with the ground truth. We evaluated this for those predicted bounding boxes and corresponding labels and averaged the results between common labels. The results indicate fairly accurate bounding box generation, with the higher IoU for the with_mask label most likely due to the dataset’s skewed distribution.
+
+*Include equations*
+
+#### Future Work
 
 The original labeled images of the dataset included bunding boxes for those who were wearing masks incorrectly, which could be useful to detect for our purpose of determining which people in a crowd are not following COVID-related health guidelines. We would also look into larger datasets that contain a wider variety of people and masks in order to make our model more robust to various situations. Faster-RCNN is only one object detection architecture of many, and it would be useful to compare the performance of our model to others like YOLOv5 and SSD trained on the same dataset. After performance comparisons on single-frame image data, we could see how well it works for detecting over multiple frames as well as evaluating the best frame rate to apply the detector in order gather data on mask wearing in real time.
-
 
 ## References
 1. “Face Mask Detection System Using AI: AI Mask Detection.” Software Development Company, www.leewayhertz.com/face-mask-detection-system/. 
