@@ -128,15 +128,26 @@ IoU = Area of Overlap/Area of Union
 The IoU for both labels are represented below:
 **With_mask**: 0.7314
 **Without_mask**: 0.6089
-We plotted the precision-recall curves for each label and in both the training and test datasets since it is resistant to skewed datasets:
 
-*Include plot*
+We put the values of the precision-recall curves for each label and in both the training and test datasets since it is resistant to skewed datasets in table format below:
+
+![PR Graph](pr_table.PNG)
 
 ## Discussion
 
 IoU between predicted region of interest and ground-truth bounding box represents how well our predicted bounding boxes match up with the ground truth. We evaluated this for those predicted bounding boxes and corresponding labels and averaged the results between common labels. The results indicate fairly accurate bounding box generation, with the higher IoU for the with_mask label most likely due to the dataset’s skewed distribution.
 
-*Include equations*
+*IoU Equation*
+
+![IOU](iou.PNG)
+
+*Precision Equation*
+
+![Precision](precision.PNG)
+
+*Recall Equation*
+
+![Recall](recall.PNG)
 
 #### Future Work
 
@@ -152,3 +163,4 @@ The original labeled images of the dataset included bunding boxes for those who 
 7. Ren, Shaoqing, et al. “Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks.” ArXiv.org, 6 Jan. 2016, arxiv.org/abs/1506.01497. 
 8. Rosebrock, Adrian. “Intersection over Union (IoU) for Object Detection.” PyImageSearch, 18 Apr. 2020, www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/. 
 9. Sigmind. “Masked Face Detection In the Wild Dataset.” Kaggle, 19 June 2020, www.kaggle.com/sigmind/masked-face-detection-wider-dataset?select=COVID-mask-detection_WIDER.tar.xz. 
+10. Babu, Gandham Vignesh. “Metrics on Object Detection.” Medium, Medium, 22 Jan. 2020, medium.com/@vignesh943628/metrics-on-object-detection-b9fe3f1bac59. 
